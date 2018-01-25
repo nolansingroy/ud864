@@ -1,43 +1,118 @@
 <!-- This is the corresponding "starter code" for 07_Markers/Infowindows in Udacity and Google's Maps
 API Course, Lesson 1 -->
 <html>
- <head>
- <!-- styles put here, but you can include a CSS file and reference it instead! -->
-   <style type="text/css">
-     html, body { height: 100%; margin: 0; padding: 0; }
-     #map { height: 100%; }
-   </style>
- </head>
- <body>
-   <div id="map"></div>
-   <script type="text/javascript">
-     // Create a map variable
-     var map;
 
-     var markers = [];
+<head>
+  <!-- styles put here, but you can include a CSS file and reference it instead! -->
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-     // Function to initialize the map within the map div
-     function initMap() {
-       map = new google.maps.Map(document.getElementById('map'), {
-         center: {lat: 40.74135, lng: -73.99802},
-         zoom: 14
-       });
-       // Create a single latLng literal object.
-       var singleLatLng = {lat: 40.74135, lng: -73.99802};
-       // TODO: Create a single marker appearing on initialize -
-       // Create it with the position of the singleLatLng,
-       // on the map, and give it your own title!
+    #map {
+      height: 100%;
+    }
 
-       // TODO: create a single infowindow, with your own content.
-       // It must appear on the marker
+    .options-box {
+      background: #fff;
+      border: 1px solid #999;
+      border-radius: 3px height: 100%;
+      line-height: 35px;
+      padding: 10px 10px 30px 10px;
+      text-align: left;
+      width: 340px;
+    }
+  </style>
+</head>
 
-       // TODO: create an EVENT LISTENER so that the infowindow opens when
-       // the marker is clicked!
-     }
-   </script>
-   <!--TODO: Insert your API Key in the below call to load the API.-->
-   <script async defer
-     src="https://maps.googleapis.com/maps/api/js?v=3&key=XXX&callback=initMap">
-   </script>
- </body>
+<body>
+  <div class="container">
+    <div class="options-box">
+      <h1> Find your New NYC Home</h1>
+      <div>
+        <input id="show-listings" type="button" value="Show Listings">
+        <input id="hide-listings" type="button" value="Hide Listings">
+      </div>
+    </div>
+    <div id="map"></div>
+    <script type="text/javascript">
+      // Create a map variable
+      var map;
+
+      var markers = [];
+
+      // Function to initialize the map within the map div
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {
+            lat: 40.74135,
+            lng: -73.99802
+          },
+          zoom: 14
+        });
+        var tribeca = {
+          lat: 40.719526,
+          lng: -74.0089934
+        };
+
+        // Create a single latLng literal object.
+        var singleLatLng = {
+          lat: 40.74135,
+          lng: -73.99802
+        };
+        // TODO: Create a single marker appearing on initialize -
+        // Create it with the position of the singleLatLng,
+        // on the map, and give it your own title!
+        var marker = new google.maps.Marker({
+          map: map,
+          position: singleLatLng,
+          title : "mytitle",
+          draggable: true
+        })
+
+        var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+var mapOptions = {
+  zoom: 4,
+  center: myLatlng
+}
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+var contentString = marker.getPosition();
+var string = contentString.toString();
+var infowindow = new google.maps.InfoWindow({
+  content: string
+});
+// Place a draggable marker on the map
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    draggable:true,
+    title:"draggable"
+});
+
+marker.addListener('click', function() {
+  infowindow.open(map, marker);
+});
+
+
+        // TODO: create a single infowindow, with your own content.
+        // It must appear on the marker
+
+        // TODO: create an EVENT LISTENER so that the infowindow opens when
+        // the marker is clicked!
+
+
+      //  document.getElementById('show-listings').addEventListener('click', showListings);
+      ///  document.getElementById('hide-listings').addEventListener('click', hideListings);
+
+      }
+    </script>
+    <!--TODO: Insert your API Key in the below call to load the API.-->
+    <script async defer         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz4SIBatO8A1AZVDINcA_G58e9d9bigxw&v=3&callback=initMap">
+    </script>
+</body>
+
 </html>
