@@ -264,6 +264,8 @@
         });
       }
 
+
+
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
@@ -309,6 +311,9 @@
           infowindow.open(map, marker);
         }
       }
+
+      var area = google.maps.geometry.spherical.computeArea(polygon.getPath());
+      window.alert(area + "Square Meters");
 
       // This function will loop through the markers array and display them all.
       function showListings() {
@@ -370,8 +375,7 @@
     </script>
 
     <script async defer
-        src=
-        "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=MYAPIKEY&v=3&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz4SIBatO8A1AZVDINcA_G58e9d9bigxw&v=3&callback=initMap">
     </script>
 
   </body>
