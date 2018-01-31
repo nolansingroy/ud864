@@ -9,35 +9,29 @@
         margin: 0;
         padding: 0;
       }
-
       .container {
         height: 100%;
         position: relative;
       }
-
       input {
         font-size: 12px;
       }
-
       h1 {
         color: #525454;
         font-size: 22px;
         margin: 0 0 10px 0;
         text-align: center;
       }
-
       #hide-listings,
       #show-listings {
         width: 48%;
       }
-
       hr {
         background: #D0D7D9;
         height: 1px;
         margin: 20px 0 20px 0;
         border: none;
       }
-
       #map {
         bottom:0px;
         height: 100%;
@@ -45,7 +39,6 @@
         position: absolute;
         right: 0px;
       }
-
       .options-box {
         background: #fff;
         border: 1px solid #999;
@@ -56,27 +49,22 @@
         text-align: left;
         width: 340px;
       }
-
       #pano {
         width: 200px;
         height: 200px;
       }
-
       .text {
         font-size: 12px;
       }
-
       #toggle-drawing {
         width: 27%;
         position: relative;
         margin-left: 10px;
       }
-
       #zoom-to-area-text {
         position: relative;
         width: 70%;
       }
-
       #zoom-to-area {
         width: 24%;
       }
@@ -103,13 +91,10 @@
     </div>
     <script>
       var map;
-
       // Create a new blank array for all the listing markers.
       var markers = [];
-
       // This global polygon variable is to ensure only ONE polygon is rendered.
       var polygon = null;
-
       function initMap() {
         // Create a styles array to use with the map.
         var styles = [
@@ -178,7 +163,6 @@
             ]
           }
         ];
-
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 40.7413549, lng: -73.9980244},
@@ -186,7 +170,6 @@
           styles: styles,
           mapTypeControl: false
         });
-
         // These are the real estate listings that will be shown to the user.
         // Normally we'd have these in a database instead.
         var locations = [
@@ -197,9 +180,7 @@
           {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
           {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
         ];
-
         var largeInfowindow = new google.maps.InfoWindow();
-
         // Initialize the drawing manager.
         var drawingManager = new google.maps.drawing.DrawingManager({
           drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -211,14 +192,11 @@
             ]
           }
         });
-
         // Style the markers a bit. This will be our listing marker icon.
         var defaultIcon = makeMarkerIcon('0091ff');
-
         // Create a "highlighted location" marker color for when the user
         // mouses over the marker.
         var highlightedIcon = makeMarkerIcon('FFFF24');
-
         // The following group uses the location array to create an array of markers on initialize.
         for (var i = 0; i < locations.length; i++) {
           // Get the position from the location array.
@@ -247,18 +225,14 @@
             this.setIcon(defaultIcon);
           });
         }
-
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
-
         document.getElementById('toggle-drawing').addEventListener('click', function() {
           toggleDrawing(drawingManager);
         });
-
         document.getElementById('zoom-to-area').addEventListener('click', function() {
           zoomToArea();
         });
-
         // Add an event listener so that the polygon is captured,  call the
         // searchWithinPolygon function. This will show the markers in the polygon,
         // and hide any outside of it.
@@ -281,7 +255,6 @@
           polygon.getPath().addListener('insert_at', searchWithinPolygon);
         });
       }
-
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
@@ -327,7 +300,6 @@
           infowindow.open(map, marker);
         }
       }
-
       // This function will loop through the markers array and display them all.
       function showListings() {
         var bounds = new google.maps.LatLngBounds();
@@ -338,14 +310,12 @@
         }
         map.fitBounds(bounds);
       }
-
       // This function will loop through the listings and hide them all.
       function hideListings() {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
       }
-
       // This function takes in a COLOR, and then creates a new marker
       // icon of that color. The icon will be 21 px wide by 34 high, have an origin
       // of 0, 0 and be anchored at 10, 34).
@@ -359,7 +329,6 @@
           new google.maps.Size(21,34));
         return markerImage;
       }
-
       // This shows and hides (respectively) the drawing options.
       function toggleDrawing(drawingManager) {
         if (drawingManager.map) {
@@ -372,7 +341,6 @@
           drawingManager.setMap(map);
         }
       }
-
       // This function hides all markers outside the polygon,
       // and shows only the ones within it. This is so that the
       // user can specify an exact area of search.
@@ -385,7 +353,6 @@
           }
         }
       }
-
       // This function takes the input value in the find nearby area text input
       // locates it, and then zooms into that area. This is so that the user can
       // show all listings, then decide to focus on one area of the map.
@@ -407,9 +374,10 @@
               if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
                 map.setZoom(15);
+                window.alert('status: '+ status)
               } else {
                 window.alert('We could not find that location - try entering a more' +
-                    ' specific place.');
+                    ' specific place.' + status);
               }
             });
         }
@@ -418,7 +386,7 @@
 
     <script async defer
         src=
-        "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=MYAPIKEY&v=3&callback=initMap">
+        "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyAz4SIBatO8A1AZVDINcA_G58e9d9bigxw&v=3&callback=initMap">
     </script>
 
   </body>
