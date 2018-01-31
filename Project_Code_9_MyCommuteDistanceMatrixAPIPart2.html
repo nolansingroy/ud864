@@ -61,7 +61,7 @@
         width: 200px;
         height: 200px;
       }
-
+/*TODO step 2  create CSS*/
       #search-within-time-text {
         width: 84%;
       }
@@ -102,6 +102,7 @@
           <input id="zoom-to-area" type="button" value="Zoom">
         </div>
         <hr>
+        <!--TODO Step 1 for adding Google Matrix api-->
         <div>
           <span class="text"> Within </span>
           <select id="max-duration">
@@ -280,7 +281,7 @@
         document.getElementById('zoom-to-area').addEventListener('click', function() {
           zoomToArea();
         });
-
+        /*TODO step #3 added event listener for our function */
         document.getElementById('search-within-time').addEventListener('click', function() {
           searchWithinTime();
         });
@@ -445,6 +446,7 @@
       // minutes, and a travel mode, and a location - and only show the listings
       // that are within that travel time (via that travel mode) of the location
       //duration starts here
+      /*TODO Step #4 write function */
       function searchWithinTime() {
         // Initialize the distance matrix service.
         var distanceMatrixService = new google.maps.DistanceMatrixService;
