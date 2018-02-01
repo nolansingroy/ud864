@@ -488,7 +488,7 @@
         // Parse through the results, and get the distance and duration of each.
         // Because there might be  multiple origins and destinations we have a nested loop
         // Then, make sure at least 1 result was found.
-        var atLeastOne = false;
+        var atLeastOne = false;//tracking this var
         for (var i = 0; i < origins.length; i++) {
           var results = response.rows[i].elements;
           for (var j = 0; j < results.length; j++) {
@@ -517,6 +517,8 @@
                 // Put this in so that this small window closes if the user clicks
                 // the marker, when the big infowindow opens
                 markers[i].infowindow = infowindow;
+
+                //create eventListener
                 google.maps.event.addListener(markers[i], 'click', function() {
                   this.infowindow.close();
                 });
